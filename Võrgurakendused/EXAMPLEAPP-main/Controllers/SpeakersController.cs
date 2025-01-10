@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ITB2203Application.Model;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ITB2203Application.Controllers
@@ -7,5 +8,12 @@ namespace ITB2203Application.Controllers
 	[ApiController]
 	public class SpeakersController : ControllerBase
 	{
+		private readonly DataContext _context;
+
+		public SpeakersController(DataContext context)
+		{
+			_context = context;
+		}
+
 	}
 }

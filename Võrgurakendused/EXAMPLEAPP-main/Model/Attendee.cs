@@ -10,6 +10,6 @@
 
 		public string Email { get; set; }
 
-		public DateTime RegistrationDate { get; set; }
+		public DateTime? RegistrationDate { get; set; }
 	}
 }
