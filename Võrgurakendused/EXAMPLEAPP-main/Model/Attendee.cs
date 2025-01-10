@@ -2,7 +2,7 @@
 {
 	public class Attendee
 	{
-		public Guid ID {  get; set; }
+		public int Id {  get; set; }
 
 		public int EventID { get; set; }
 
