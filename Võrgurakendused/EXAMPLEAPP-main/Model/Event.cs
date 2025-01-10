@@ -2,9 +2,9 @@
 {
 	public class Event
 	{
-		public Guid Id { get; set; }	
+		public int Id { get; set; }	
 
-		public int speakerID { get; set; }
+		public int speakerId { get; set; }
 
 		public string Name { get; set; }
 

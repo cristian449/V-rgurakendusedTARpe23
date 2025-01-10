@@ -9,11 +9,11 @@ public class DataContext : DbContext
 
     public DbSet<Test>? Tests { get; set; }
 
-	public DbSet<Test>? Attendees { get; set; }
+	public DbSet<Attendee>? Attendees { get; set; }
 
-	public DbSet<Test>? Events { get; set; }
+	public DbSet<Event>? Events { get; set; }
 
-	public DbSet<Test>? Speakers { get; set; }
+	public DbSet<Speaker>? Speakers { get; set; }
 
 
 

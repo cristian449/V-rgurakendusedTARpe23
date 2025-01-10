@@ -17,7 +17,7 @@ namespace ITB2203Application.Controllers
 		}
 
 		[HttpGet]
-		public ActionResult<IEnumerable<Attendee>> GetSpeaker(string? name = null)
+		public ActionResult<IEnumerable<Attendee>> GetAttendee(string? name = null)
 		{
 			var query = _context.Attendees!.AsQueryable();
 
@@ -71,7 +71,7 @@ namespace ITB2203Application.Controllers
 			_context.Add(attendee);
 			_context.SaveChanges();
 
-			return CreatedAtAction(nameof(GetSpeaker), new { Id = attendee.Id }, attendee);
+			return CreatedAtAction(nameof(GetAttendee), new { Id = attendee.Id }, attendee);
 		}
 
 		[HttpDelete("{id}")]
