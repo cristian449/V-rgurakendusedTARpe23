@@ -57,7 +57,7 @@ namespace ITB2203Application.Controllers
 			_context.Entry(eventItem).State = EntityState.Modified;
 
 
-			return NoContent()sss
+			return NoContent();
 		}
 
 		[HttpPost]
