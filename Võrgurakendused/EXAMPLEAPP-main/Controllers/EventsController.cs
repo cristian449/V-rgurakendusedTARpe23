@@ -1,7 +1,8 @@
 ﻿using ITB2203Application.Model;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+
 
 namespace ITB2203Application.Controllers
 {
@@ -9,86 +10,98 @@ namespace ITB2203Application.Controllers
 	[ApiController]
 	public class EventsController : ControllerBase
 	{
-		//private readonly DataContext _context;
+		private readonly DataContext _context;
 
-		//public EventsController(DataContext context)
-		//{
-		//	_context = context;
-		//}
+		public EventsController(DataContext context)
+		{
+			_context = context;
+		}
 
-		//[HttpGet]
-		//public ActionResult<IEnumerable<Event>> GetEvent(string? name = null)
-		//{
-		//	var query = _context.Events!.AsQueryable();
+		[HttpGet]
+		public ActionResult<IEnumerable<Event>> GetEvents(string? name = null)
+		{
+			var query = _context.Events!.AsQueryable();
 
-		//	if (name != null)
-		//		query = query.Where(x => x.Name != null && x.Name.ToUpper().Contains(name.ToUpper()));
+			if (name != null)
+				query = query.Where(x => x.Name != null && x.Name.ToUpper().Contains(name.ToUpper()));
 
-		//	return Ok(query);
-		//}
+			return Ok(query);
+		}
 
-		//[HttpGet("{id}")]
-		//public ActionResult<Event> GetEvent(int id)
-		//{
-		//	var event = _context.Events!.Find(id);
+		[HttpGet("{id}")]
+		public ActionResult<Event> GetEvent(int id)
+		{
+			var eventItem = _context.Events!.Find(id);
 
-		//	if (event == null)
-		//	{
-		//		return NotFound();
-		//	}
+			if (eventItem == null)
+			{
+				return NotFound();
+			}
 
-		//	return Ok(event);
-		//}
+			return Ok(eventItem);
+		}
 
+		[HttpPut("{id}")]
+		public IActionResult PutEvent(int id, Event eventItem)
+		{
+			if (id != eventItem.Id)
+			{
+				return BadRequest();
+			}
 
+			if (!_context.Speakers!.Any(s => s.Id == eventItem.SpeakerId))
+			{
+				return NotFound("Speaker not found");
+			}
 
-		//[HttpPut("{Id}")]
-		//public IActionResult PutAttendee(int Id, Attendee attendee)
-		//{
-		//	if (!attendee.Email.Contains("@"))
-		//	{
-		//		return BadRequest("400 Bad request");
-		//	}
+			_context.Entry(eventItem).State = EntityState.Modified;
 
-		//	var dbAttendee = _context.Attendees!.AsNoTracking().FirstOrDefault(x => x.Id == attendee.Id);
-		//	if (Id != attendee.Id || dbAttendee == null)
-		//	{
-		//		return NotFound();
-		//	}
+			try
+			{
+				_context.SaveChanges();
+			}
+			catch (DbUpdateConcurrencyException)
+			{
+				if (!_context.Events!.Any(e => e.Id == id))
+				{
+					return NotFound();
+				}
+				else
+				{
+					throw;
+				}
+			}
 
-		//	_context.Update(attendee);
-		//	_context.SaveChanges();
+			return NoContent();
+		}
 
-		//	return NoContent();
-		//}
+		[HttpPost]
+		public ActionResult<Event> PostEvent(Event eventItem)
+		{
+			if (!_context.Speakers!.Any(s => s.Id == eventItem.SpeakerId))
+			{
+				return NotFound("Speaker not found");
+			}
 
-		//[HttpPost]
-		//public ActionResult<Attendee> PostAttendee(Attendee attendee)
-		//{
-		//	if (!attendee.Email.Contains("@"))
-		//	{
-		//		return BadRequest("400 Bad Request.");
-		//	}
+			_context.Events!.Add(eventItem);
+			_context.SaveChanges();
 
-		//	_context.Add(attendee);
-		//	_context.SaveChanges();
+			return CreatedAtAction(nameof(GetEvent), new { id = eventItem.Id }, eventItem);
+		}
 
-		//	return CreatedAtAction(nameof(GetEvent), new { Id = attendee.Id }, attendee);
-		//}
+		[HttpDelete("{id}")]
+		public IActionResult DeleteEvent(int id)
+		{
+			var eventItem = _context.Events!.Find(id);
+			if (eventItem == null)
+			{
+				return NotFound();
+			}
 
-		//[HttpDelete("{id}")]
-		//public IActionResult DeleteAttendee(int id)
-		//{
-		//	var attendee = _context.Attendees!.Find(id);
-		//	if (attendee == null)
-		//	{
-		//		return NotFound();
-		//	}
+			_context.Events.Remove(eventItem);
+			_context.SaveChanges();
 
-		//	_context.Remove(attendee);
-		//	_context.SaveChanges();
-
-		//	return NoContent();
-		//}
+			return NoContent();
+		}
 	}
 }
