@@ -56,23 +56,8 @@ namespace ITB2203Application.Controllers
 
 			_context.Entry(eventItem).State = EntityState.Modified;
 
-			try
-			{
-				_context.SaveChanges();
-			}
-			catch (DbUpdateConcurrencyException)
-			{
-				if (!_context.Events!.Any(e => e.Id == id))
-				{
-					return NotFound();
-				}
-				else
-				{
-					throw;
-				}
-			}
 
-			return NoContent();
+			return NoContent()sss
 		}
 
 		[HttpPost]
