@@ -1,0 +1,7 @@
+C:\Users\arvuti\Documents\webAPIloomine CristianPent TARpe23\Workoutappliaction\obj\Debug\net9.0\Workoutappliaction.csproj.AssemblyReference.cache
+C:\Users\arvuti\Documents\webAPIloomine CristianPent TARpe23\Workoutappliaction\obj\Debug\net9.0\Workoutappliaction.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\arvuti\Documents\webAPIloomine CristianPent TARpe23\Workoutappliaction\obj\Debug\net9.0\Workoutappliaction.AssemblyInfoInputs.cache
+C:\Users\arvuti\Documents\webAPIloomine CristianPent TARpe23\Workoutappliaction\obj\Debug\net9.0\Workoutappliaction.AssemblyInfo.cs
+C:\Users\arvuti\Documents\webAPIloomine CristianPent TARpe23\Workoutappliaction\obj\Debug\net9.0\Workoutappliaction.csproj.CoreCompileInputs.cache
+C:\Users\arvuti\Documents\webAPIloomine CristianPent TARpe23\Workoutappliaction\obj\Debug\net9.0\Workoutappliaction.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\arvuti\Documents\webAPIloomine CristianPent TARpe23\Workoutappliaction\obj\Debug\net9.0\Workoutappliaction.MvcApplicationPartsAssemblyInfo.cache
